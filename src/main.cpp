@@ -1,6 +1,6 @@
 ﻿#include <SFML/Graphics.hpp>
 #include <iostream>
-#include "triangles.h"
+#include "curves.h"
 
 /**
  * This program draws a triangle. It uses drawLineNaiveLow by default, so the triangle 
@@ -33,8 +33,8 @@ int main() {
 		last = now;
 		std::cout << 1 / diff.asSeconds() << " FPS " << std::endl;
 		
-		drawTriangle(window, sf::Vector2i(100, 100), sf::Vector2i(500, 500), sf::Vector2i(50, 700),
-			sf::Color::Green);
+		drawBezierCubic(window, sf::Vector2i(100, 600), sf::Vector2i(300, 100),
+			sf::Vector2i(500, 800), sf::Vector2i(700, 400), sf::Color::Yellow);
 
 		window.display();
 	}
