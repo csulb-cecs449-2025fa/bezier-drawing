@@ -3,9 +3,8 @@
 #include "curves.h"
 
 /**
- * This program draws a triangle. It uses drawLineNaiveLow by default, so the triangle 
- * doesn't look pretty. Once you copy over your lines.h and lines.cpp from Homework 1,
- * the triangle should render correctly.
+ * This program tries to draw a cubic Bezier curve, but shows nothing initially because
+ * curves.cpp is incomplete. 
  */
 
 void drawPixel(sf::RenderWindow& window, sf::Vector2i position, sf::Color color) {
