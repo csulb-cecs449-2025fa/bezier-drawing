@@ -1,3 +1,3 @@
-# Line drawing
+# Triangle drawing
 
-Please see Homework 1 on Canvas for an overview of this template.
+Please see Homework 2 on Canvas for an overview of this template.
