@@ -1,6 +1,12 @@
 ﻿#include <SFML/Graphics.hpp>
 #include <iostream>
-#include "lines.h"
+#include "triangles.h"
+
+/**
+ * This program draws a triangle. It uses drawLineNaiveLow by default, so the triangle 
+ * doesn't look pretty. Once you copy over your lines.h and lines.cpp from Homework 1,
+ * the triangle should render correctly.
+ */
 
 void drawPixel(sf::RenderWindow& window, sf::Vector2i position, sf::Color color) {
 	sf::Vertex pixel[1] = {
@@ -13,17 +19,12 @@ int main() {
 	sf::RenderWindow window{ sf::VideoMode{800, 800}, "SFML Demo" };
 	sf::Clock c;
 	auto last = c.getElapsedTime();
-	uint32_t mx = 400, my = 300;
 
 	while (window.isOpen()) {
 		sf::Event ev;
 		while (window.pollEvent(ev)) {
 			if (ev.type == sf::Event::Closed)
 				window.close();
-			else if (ev.type == sf::Event::MouseMoved) {
-				mx = ev.mouseMove.x;
-				my = ev.mouseMove.y;
-			}
 		}
 		window.clear();
 
@@ -32,7 +33,8 @@ int main() {
 		last = now;
 		std::cout << 1 / diff.asSeconds() << " FPS " << std::endl;
 		
-		drawLineNaive(window, sf::Vector2i(100, 300), sf::Vector2i(700, 613), sf::Color::Red);
+		drawTriangle(window, sf::Vector2i(100, 100), sf::Vector2i(500, 500), sf::Vector2i(50, 700),
+			sf::Color::Green);
 
 		window.display();
 	}

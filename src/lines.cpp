@@ -21,3 +21,7 @@ void drawLineNaive(sf::RenderWindow& window, sf::Vector2i start, sf::Vector2i en
 		y += m;
 	}
 }
+
+void drawLine(sf::RenderWindow& window, sf::Vector2i start, sf::Vector2i end, sf::Color color) {
+	drawLineNaive(window, start, end, color);
+}
