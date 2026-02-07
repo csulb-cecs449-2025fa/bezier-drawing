@@ -1,23 +1,22 @@
 ﻿#include <SFML/Graphics.hpp>
 #include <iostream>
 #include "curves.h"
+#include <glm/ext.hpp>
 
 /**
  * This program tries to draw a cubic Bezier curve, but shows nothing initially because
  * curves.cpp is incomplete.
  */
 
-void drawPixel(sf::RenderWindow& window, sf::Vector2i position, sf::Color color) {
+void drawPixel(sf::RenderWindow& window, glm::ivec2 position, sf::Color color) {
 	float pX{ static_cast<float>(position.x) };
 	float pY{ static_cast<float>(position.y) };
 
-	std::array<sf::Vertex, 1> pixel{
-		sf::Vertex{
-			sf::Vector2f{pX, pY},
-			color
-		}
+	sf::Vertex pixel[1]{
+		sf::Vector2f{pX, pY},
+		color
 	};
-	window.draw(pixel.data(), 1, sf::PrimitiveType::Points);
+	window.draw(pixel, 1, sf::PrimitiveType::Points);
 }
 
 int main() {
@@ -38,8 +37,9 @@ int main() {
 		last = now;
 
 		window.clear();
-		drawBezierCubic(window, sf::Vector2i{ 100, 600 }, sf::Vector2i{ 300, 100 },
-			sf::Vector2i{ 500, 800 }, sf::Vector2i{ 700, 400 }, sf::Color::Yellow);
+		drawCircleParametric(window, glm::ivec2{ 400, 300 }, 200, sf::Color::White);
+		//drawBezierCubic(window, glm::ivec2{ 100, 600 }, glm::ivec2{ 300, 100 },
+		//	glm::ivec2{ 500, 800 }, glm::ivec2{ 700, 400 }, sf::Color::Yellow);
 		window.display();
 	}
 

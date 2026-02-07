@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
-void drawCircleNaive(sf::RenderWindow& window, sf::Vector2i center, uint32_t radius, sf::Color color);
-void fillCircleNaive(sf::RenderWindow& window, sf::Vector2i center, uint32_t radius, sf::Color color);
-void drawCircleParametric(sf::RenderWindow& window, sf::Vector2i center, int32_t radius, sf::Color color);
-void drawBezierCubic(sf::RenderWindow& window, sf::Vector2i p0, sf::Vector2i p1, sf::Vector2i p2, sf::Vector2i p3, sf::Color color);
+#include <glm/ext.hpp>
+void drawCircleNaive(sf::RenderWindow& window, glm::ivec2 center, int32_t radius, sf::Color color);
+void fillCircleNaive(sf::RenderWindow& window, glm::ivec2 center, int32_t radius, sf::Color color);
+void drawCircleParametric(sf::RenderWindow& window, glm::ivec2 center, int32_t radius, sf::Color color);
+void drawBezierCubic(sf::RenderWindow& window, glm::ivec2 p0, glm::ivec2 p1, glm::ivec2 p2, glm::ivec2 p3, sf::Color color);

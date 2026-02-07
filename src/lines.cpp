@@ -1,6 +1,5 @@
 #include "lines.h"
 #include <SFML/Graphics.hpp>
-
 /**
  * @brief Draws a low-slope line using a naive algorithm.
  * @param window the SFML window to draw to.
@@ -8,28 +7,42 @@
  * @param end the ending point of the line.
  * @param color the color of the line.
  */
-void drawLineNaive(sf::RenderWindow& window, sf::Vector2i start,
-    sf::Vector2i end, sf::Color color) {
+void drawLineNaive(sf::RenderWindow& window, glm::ivec2 start, glm::ivec2 end, sf::Color color) {
+	if (start.x > end.x) {
+		std::swap(start, end);
+	}
 
-    // Make sure the line goes from left to right.
-    if (start.x > end.x) {
-        std::swap(start, end);
-    }
+	double m{ static_cast<double>(end.y - start.y) / (end.x - start.x) };
 
-    // Compute m ahead of time.
-    double m{ static_cast<double>(end.y - start.y) / (end.x - start.x) };
-    double y{ start.y };
+	// The first point on the line is (start.x, start.y).
+	int32_t x{ start.x };
 
-    // In each step of the loop, x goes up by 1 and y goes up by m.
-    for (auto x{ start.x }; x < end.x + 1; ++x) {
-        // Round the fractional y to the nearest integer pixel.
-        auto yCoord{ static_cast<int32_t>(std::round(y)) };
-        drawPixel(window, sf::Vector2i{ x, yCoord }, color);
-        y += m;
-    }
+	// We separately track where y *should be*, and also which integer y value is closest to that.
+	double yReal{ static_cast<double>(start.y) };
+	int32_t yPixel{ start.y };
+
+	while (x <= end.x) {
+		drawPixel(window, glm::ivec2{ x, yPixel }, color);
+		// x always goes up by 1.
+		++x;
+		// yReal increases by m.
+		yReal += m;
+		// yPixel is the rounded yReal.
+		yPixel = static_cast<int32_t>(std::round(yReal));
+	}
 }
 
 
-void drawLine(sf::RenderWindow& window, sf::Vector2i start, sf::Vector2i end, sf::Color color) {
-	drawLineNaive(window, start, end, color);
+void drawLine(sf::RenderWindow& window, glm::ivec2 start, glm::ivec2 end, sf::Color color) {
+//	drawLineNaive(window, start, end, color);
+	float sX{ static_cast<float>(start.x) };
+	float sY{ static_cast<float>(start.y) };
+	float eX{ static_cast<float>(end.x) };
+	float eY{ static_cast<float>(end.y) };
+	std::array<sf::Vertex, 2> points{
+		sf::Vertex{sf::Vector2f{sX, sY}, color},
+		sf::Vertex{sf::Vector2f{eX, eY}, color}
+	};
+	window.draw(points.data(), 2, sf::PrimitiveType::Lines);
 }
+
